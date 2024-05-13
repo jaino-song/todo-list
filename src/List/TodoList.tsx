@@ -1,15 +1,21 @@
 import styles from './TodoList.module.css';
 import TodoItem from '../ListItem/TodoItem';
+import { useTodoState } from '../Todo/TodoProvider';
+
 
 export default function TodoList() {
-
-    const arr = ['React', 'Typescript', 'Javascript', 'CSS', 'HTML'];
+    const todoState = useTodoState();
 
     return (
     <section className={styles.container}>
         <ol className={styles.olContainer}>
-            {arr.map((str, index) => {
-                return <TodoItem key={`${str}_${index}`} text={str} />})
+            {todoState.todos.map((todo) => {
+                return <TodoItem 
+                    id={todo.id}
+                    key={todo.id} 
+                    text={todo.text} 
+                    isChecked={todo.isChecked}
+                    />})
             }
         </ol>
     </section>
